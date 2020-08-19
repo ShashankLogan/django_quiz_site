@@ -1,0 +1,121 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a  {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.advertise{
+margin-left: 1250px;
+background-color:black;
+}
+
+.advertise p{
+color:red;
+height:100%;
+
+}
+.main {
+  margin-left: 220px; /* Same as the width of the sidenav */
+
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.onequiz{
+width = 500px;
+height = 200px;
+border-top-left-radius: 6.2px;
+border-top-right-radius: 6.2px;
+border-bottom-right-radius: 0px;
+border-bottom-left-radius: 0px;
+background-size: cover;
+}
+
+
+
+.container1 {
+  position: relative;
+  width: 65%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+ 
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #676869;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+}
+
+.container1:hover .overlay {
+  height: 100%;
+}
+
+.text {
+  white-space: pre;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: auto;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.onequizzzzz{
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 27%;
+  margin-top:10px;
+ padding-left: 10px;
+ padding-top:10px;
+
+ /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+  display: table;
+  clear: both;
+}
+
