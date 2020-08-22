@@ -6,7 +6,6 @@ from .models import Quiz, Category, Question, Progress
 from mcq.models import MCQQuestion, Answer
 from django.utils.translation import ugettext_lazy as _
 from .models import CSVUpload
-import nested_admin
 
 
 class CSVUploadsAdmin(admin.ModelAdmin):
