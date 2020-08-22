@@ -288,7 +288,7 @@ class Progress(models.Model):
 
 
 class SittingManager(models.Manager):
-    user = authenticate(username='Shashank', password='shashank')
+    
     def new_sitting(self, user, quiz):
         if quiz.random_order is True:
             question_set = quiz.question_set.all() \
