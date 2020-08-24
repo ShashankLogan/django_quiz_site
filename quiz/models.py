@@ -30,7 +30,7 @@ class Category(models.Model):
 
     category = models.CharField(
         verbose_name=_("Category"),
-        max_length=255, blank=True,
+        max_length=250, blank=True,
         unique=True, null=True)
 
     objects = CategoryManager()
@@ -47,14 +47,14 @@ class Quiz(models.Model):
 
     title = models.CharField(
         verbose_name=_("Title"),
-        max_length=255, blank=False)
+        max_length=60, blank=False)
 
     description = models.TextField(
         verbose_name=_("Description"),
         blank=True, help_text=_("a description of the quiz"))
 
     url = models.SlugField(
-        max_length=255, blank=False,
+        max_length=60, blank=False,
         help_text=_("a user friendly url"),
         verbose_name=_("user friendly url"))
 
@@ -172,12 +172,12 @@ class Progress(models.Model):
     """
     user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_("User"), on_delete=models.CASCADE)
 
-    score = models.CharField(validators=[validate_comma_separated_integer_list], max_length=255,
+    score = models.CharField(validators=[validate_comma_separated_integer_list], max_length=1024,
                                               verbose_name=_("Score"))
 
-    correct_answer = models.CharField(max_length=255, verbose_name=_('Correct Answers'))
+    correct_answer = models.CharField(max_length=10, verbose_name=_('Correct Answers'))
 
-    wrong_answer = models.CharField(max_length=255, verbose_name=_('Wrong Answers')) 
+    wrong_answer = models.CharField(max_length=10, verbose_name=_('Wrong Answers')) 
 
     objects = ProgressManager()
 
@@ -288,7 +288,7 @@ class Progress(models.Model):
 
 
 class SittingManager(models.Manager):
-    
+    user = authenticate(username='Shashank', password='shashank')
     def new_sitting(self, user, quiz):
         if quiz.random_order is True:
             question_set = quiz.question_set.all() \
@@ -355,13 +355,13 @@ class Sitting(models.Model):
     quiz = models.ForeignKey(Quiz, verbose_name=_("Quiz"), on_delete=models.CASCADE)
 
     question_order = models.CharField(validators=[validate_comma_separated_integer_list],
-        max_length=255, verbose_name=_("Question Order"))
+        max_length=1024, verbose_name=_("Question Order"))
 
     question_list = models.CharField(validators=[validate_comma_separated_integer_list],
-        max_length=255, verbose_name=_("Question List"))
+        max_length=1024, verbose_name=_("Question List"))
 
     incorrect_questions = models.CharField(validators=[validate_comma_separated_integer_list],
-        max_length=255, blank=True, verbose_name=_("Incorrect questions"))
+        max_length=1024, blank=True, verbose_name=_("Incorrect questions"))
 
     current_score = models.IntegerField(verbose_name=_("Current Score"))
 
@@ -527,9 +527,13 @@ class Question(models.Model):
                                  verbose_name=_("Category"),
                                  blank=True,
                                  null=True, on_delete=models.CASCADE)
-								 
-								 
-    content = models.CharField(max_length=255,
+
+    figure = models.ImageField(upload_to='uploads/%Y/%m/%d',
+                               blank=True,
+                               null=True,
+                               verbose_name=_("Figure"))
+
+    content = models.CharField(max_length=1000,
                                blank=False,
                                help_text=_("Enter the question text that "
                                            "you want displayed"),
@@ -563,7 +567,7 @@ def upload_csv_file(instance, filename):
 
 
 class CSVUpload(models.Model):
-    title       = models.CharField(max_length=255, verbose_name=_('Title'), blank=False)
+    title       = models.CharField(max_length=100, verbose_name=_('Title'), blank=False)
     user        = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     file        = models.FileField(upload_to=upload_csv_file, validators=[csv_file_validator])
     completed   = models.BooleanField(default=False)
