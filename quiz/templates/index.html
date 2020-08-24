@@ -1,0 +1,62 @@
+<! DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="/static/title.png" type="image/icon type">
+    <link rel="stylesheet" href="/static/CSS_file.css">
+	<title>German Quizzes</title>
+	<meta charset="utf-8">
+
+</head>
+
+<body>
+
+<div class="sidenav">
+    {% if categories %}
+
+        {% for cate in categories %}
+                <a href="/category/{{  cate.category }}">{{ cate.category }}</a>
+
+
+        {% endfor %}
+
+        {% endif %}
+</div>
+
+<!-- dont remove main -->
+<div class="main">
+    <div class = "onequizzzzz">
+
+        {% if data %}
+
+        <div class="row">
+        {% for question in data %}
+
+        <div class="column" >
+
+        <div class="container1">
+        <a href="/{{ question.url }}/take">
+        <img src="/static/{{ question.title }}.png" alt="{{ question.title }}" class="image">
+
+        <div class="overlay">
+        <div class="text">{{ question.description}}</div>
+
+        </div>
+            </a>
+        </div>
+         </div>
+
+          {% endfor %}
+         </div>
+        {% endif %}
+
+    </div>
+</div>
+<!--
+<div class="advertise">
+<p>Test</p>
+</div>
+-->
+
+
+</body>
+</html>
