@@ -15,6 +15,7 @@ from .validators import csv_file_validator
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate
+from django.shortcuts import get_object_or_404
 
 class CategoryManager(models.Manager):
 
@@ -392,7 +393,7 @@ class Sitting(models.Model):
 
         first, _ = self.question_list.split(',', 1)
         question_id = int(first)
-        return Question.objects.get_subclass(id=question_id)
+		return get_object_or_404(Question, id=question_id)
 
     def remove_first_question(self):
         if not self.question_list:
