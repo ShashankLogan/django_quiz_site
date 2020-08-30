@@ -393,7 +393,7 @@ class Sitting(models.Model):
 
         first, _ = self.question_list.split(',', 1)
         question_id = int(first)
-        return get_object_or_404(Question, id=question_id)
+        return Question.objects.get_subclass(id=question_id)
 
     def remove_first_question(self):
         if not self.question_list:
