@@ -167,13 +167,13 @@ class QuizTake(FormView):
         '''
         self.request = HttpRequest()
         self.request.method = 'POST'
-        self.request.META['useranme'] = 'Shashank'
-        self.request.META['password'] = 'shashank'
+        self.request.META['useranme'] = ''
+        self.request.META['password'] = ''
         engine = import_module(settings.SESSION_ENGINE)
         session_key = None
         self.request.session = engine.SessionStore(session_key)
-        #user = User.objects.get(username='Shashank')
-        self.request.user = authenticate(username='Shashank', password='shashank')
+        #user = User.objects.get(username='\')
+        self.request.user = authenticate(username='', password='')
         login(self.request,self.request.user)
         '''
 
@@ -245,20 +245,6 @@ class QuizTake(FormView):
         return context
 
     def form_valid_user(self, form):
-        '''
-        self.request = HttpRequest()
-        self.request.method = 'POST'
-        self.request.META['useranme'] = 'Shashank'
-        self.request.META['password'] = 'shashank'
-        engine = import_module(settings.SESSION_ENGINE)
-        session_key = None
-        self.request.session = engine.SessionStore(session_key)
-        #user = User.objects.get(username='Shashank')
-        self.request.user = authenticate(username='Shashank', password='shashank')
-        login(self.request,self.request.user)
-        '''
-        #progress, c = Progress.objects.get_or_create(user=self.request.user)
-        progress, c = Progress.objects.get_or_create(user=authenticate(username='Shashank', password='shashank'))
         guess = form.cleaned_data['answers']
         is_correct = self.question.check_if_correct(guess)
 
@@ -329,14 +315,14 @@ def login_user(request):
     engine = import_module(settings.SESSION_ENGINE)
     session_key = None
     request.session = engine.SessionStore(session_key)
-    # user = User.objects.get(username='Shashank')
+    # user = User.objects.get(username='')
     request.user = authenticate(username='user', password='user1234')
     #login(self.request, self.request.user)
 
     if request.method == 'POST':
         #username = request.POST['username']
         #password = request.POST['password']
-        user = authenticate(username='user', password='user1234') #authenticate(request, username=username, password=password)
+        user = authenticate(username='user', password='user1234') 
         if user is not None:
             login(request, user)
             #messages.success(request, 'You have successfully logged in')
