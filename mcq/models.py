@@ -39,7 +39,7 @@ class MCQQuestion(Question):
         return self.order_answers(Answer.objects.filter(question=self))
 
     def get_answers_list(self):
-		return [(answer.id, answer.content) for answer in self.order_answers(get_list_or_404(Answer, question=self))]
+	    return [(answer.id, answer.content) for answer in self.order_answers(get_list_or_404(Answer, question=self))]
 
     def answer_choice_to_string(self, guess):
         return Answer.objects.get(id=guess).content
