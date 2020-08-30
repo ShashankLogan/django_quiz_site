@@ -395,6 +395,7 @@ class Sitting(models.Model):
         question_id = int(first)
 		return get_object_or_404(Question, id=question_id)
 
+		
     def remove_first_question(self):
         if not self.question_list:
             return
