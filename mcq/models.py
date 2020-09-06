@@ -38,8 +38,8 @@ class MCQQuestion(Question):
         return self.order_answers(Answer.objects.filter(question=self))
 
     def get_answers_list(self):
-        return [(answer.id, answer.content) for answer in self.order_answers(Answer.objects.filter(question=self)) if
-                (answer.id is not None) and (answer.content is not None)]
+        return [(answer.id, answer.content) for answer in self.order_answers(Answer.objects.filter(question=self))
+                if answer.content is not None]
 
     def answer_choice_to_string(self, guess):
         return Answer.objects.get(id=guess).content
