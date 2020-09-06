@@ -38,6 +38,8 @@ class MCQQuestion(Question):
         return self.order_answers(Answer.objects.filter(question=self))
 
     def get_answers_list(self):
+        print([(answer.id, answer.content) for answer in self.order_answers(Answer.objects.filter(question=self))
+               if answer.content is not None])
         return [(answer.id, answer.content) for answer in self.order_answers(Answer.objects.filter(question=self))
                 if answer.content is not None]
 
