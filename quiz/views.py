@@ -164,19 +164,6 @@ class QuizTake(FormView):
     form_class = QuestionForm
     template_name = 'question.html'
     def dispatch(self, request, *args, **kwargs):
-        '''
-        self.request = HttpRequest()
-        self.request.method = 'POST'
-        self.request.META['useranme'] = ''
-        self.request.META['password'] = ''
-        engine = import_module(settings.SESSION_ENGINE)
-        session_key = None
-        self.request.session = engine.SessionStore(session_key)
-        #user = User.objects.get(username='\')
-        self.request.user = authenticate(username='', password='')
-        login(self.request,self.request.user)
-        '''
-
         self.quiz = get_object_or_404(Quiz, url=self.kwargs['quiz_name'])
 
         if self.quiz.draft and not request.user.has_perm('quiz.change_quiz'):
@@ -196,19 +183,6 @@ class QuizTake(FormView):
         return super(QuizTake, self).dispatch(request, *args, **kwargs)
 
     def get_form(self, form_class=QuestionForm):
-        '''
-        self.request = HttpRequest()
-        self.request.method = 'POST'
-        self.request.META['useranme'] = 'Shashank'
-        self.request.META['password'] = 'shashank'
-        engine = import_module(settings.SESSION_ENGINE)
-        session_key = None
-        self.request.session = engine.SessionStore(session_key)
-        #user = User.objects.get(username='Shashank')
-        self.request.user = authenticate(username='Shashank', password='shashank')
-        login(self.request,self.request.user)
-        '''
-        #if self.logged_in_user:
         if True:
             print(self)
             self.question = self.sitting.get_first_question()
@@ -225,8 +199,7 @@ class QuizTake(FormView):
         return dict(kwargs, question=self.question)
 
     def form_valid(self, form):
-        #if self.logged_in_user:
-        if True:
+        if self.logged_in_user:
             self.form_valid_user(form)
             if self.sitting.get_first_question() is False:
                 return self.final_result_user()
@@ -245,6 +218,7 @@ class QuizTake(FormView):
         return context
 
     def form_valid_user(self, form):
+		progress, c = Progress.objects.get_or_create(user=self.request.user)
         guess = form.cleaned_data['answers']
         is_correct = self.question.check_if_correct(guess)
 
